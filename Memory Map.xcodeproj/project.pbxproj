@@ -14,6 +14,7 @@
 		8CEC45D81E767E700025E427 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CEC45D61E767E700025E427 /* LaunchScreen.storyboard */; };
 		8CEC45E01E7686AB0025E427 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEC45DF1E7686AB0025E427 /* APIController.swift */; };
 		8CEC45E31E769D470025E427 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEC45E21E769D470025E427 /* MainViewModel.swift */; };
+		8CEC45E51E76B1150025E427 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEC45E41E76B1150025E427 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		8CEC45D91E767E700025E427 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CEC45DF1E7686AB0025E427 /* APIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIController.swift; path = Util/APIController.swift; sourceTree = "<group>"; };
 		8CEC45E21E769D470025E427 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		8CEC45E41E76B1150025E427 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Models/Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				8CEC45E11E7686B50025E427 /* Util */,
+				8CEC45E61E76B11A0025E427 /* Models */,
 				8CEC45CD1E767E700025E427 /* AppDelegate.swift */,
 				8CEC45CF1E767E700025E427 /* MainViewController.swift */,
 				8CEC45E21E769D470025E427 /* MainViewModel.swift */,
@@ -76,6 +79,14 @@
 				8CEC45DF1E7686AB0025E427 /* APIController.swift */,
 			);
 			name = Util;
+			sourceTree = "<group>";
+		};
+		8CEC45E61E76B11A0025E427 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8CEC45E41E76B1150025E427 /* Card.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +164,7 @@
 			files = (
 				8CEC45D01E767E700025E427 /* MainViewController.swift in Sources */,
 				8CEC45CE1E767E700025E427 /* AppDelegate.swift in Sources */,
+				8CEC45E51E76B1150025E427 /* Card.swift in Sources */,
 				8CEC45E01E7686AB0025E427 /* APIController.swift in Sources */,
 				8CEC45E31E769D470025E427 /* MainViewModel.swift in Sources */,
 			);
