@@ -14,6 +14,8 @@ public struct Card {
     let imagePath: String!
     var image: UIImage?
     
+    var revealed = false
+    
     public init(id: Int, path: String) {
         self.id = id
         self.imagePath = path

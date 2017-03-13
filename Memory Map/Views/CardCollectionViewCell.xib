@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CardCollectionViewCell" id="gTV-IL-0wX" customClass="CardCollectionViewCell" customModule="Memory_Map" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="203" height="205"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="203" height="205"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MVq-br-5yp">
+                        <rect key="frame" x="0.0" y="0.0" width="203" height="205"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultCard" translatesAutoresizingMaskIntoConstraints="NO" id="Th4-Je-QNm">
+                                <rect key="frame" x="1" y="1" width="201" height="203"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.39908272879464285" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Th4-Je-QNm" firstAttribute="top" secondItem="MVq-br-5yp" secondAttribute="top" constant="1" id="2q6-M9-iye"/>
+                            <constraint firstAttribute="trailing" secondItem="Th4-Je-QNm" secondAttribute="trailing" constant="1" id="L5S-rk-naz"/>
+                            <constraint firstAttribute="bottom" secondItem="Th4-Je-QNm" secondAttribute="bottom" constant="1" id="QhF-dp-Xmw"/>
+                            <constraint firstItem="Th4-Je-QNm" firstAttribute="leading" secondItem="MVq-br-5yp" secondAttribute="leading" constant="1" id="hMQ-81-P2Z"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="MVq-br-5yp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="64J-Dt-4yw"/>
+                <constraint firstItem="MVq-br-5yp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="MeH-4R-dgq"/>
+                <constraint firstAttribute="trailing" secondItem="MVq-br-5yp" secondAttribute="trailing" id="RBm-F2-4E0"/>
+                <constraint firstAttribute="bottom" secondItem="MVq-br-5yp" secondAttribute="bottom" id="hrO-R2-xCe"/>
+            </constraints>
+            <size key="customSize" width="203" height="205"/>
+            <connections>
+                <outlet property="cardImageView" destination="Th4-Je-QNm" id="pxj-d4-yOE"/>
+            </connections>
+            <point key="canvasLocation" x="-83.5" y="41.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="defaultCard" width="80" height="72"/>
+    </resources>
+</document>

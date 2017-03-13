@@ -15,6 +15,8 @@
 		8CEC45E01E7686AB0025E427 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEC45DF1E7686AB0025E427 /* APIController.swift */; };
 		8CEC45E31E769D470025E427 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEC45E21E769D470025E427 /* MainViewModel.swift */; };
 		8CEC45E51E76B1150025E427 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEC45E41E76B1150025E427 /* Card.swift */; };
+		8CEC45E91E76B58A0025E427 /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CEC45E71E76B58A0025E427 /* CardCollectionViewCell.swift */; };
+		8CEC45EA1E76B58A0025E427 /* CardCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CEC45E81E76B58A0025E427 /* CardCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		8CEC45DF1E7686AB0025E427 /* APIController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIController.swift; path = Util/APIController.swift; sourceTree = "<group>"; };
 		8CEC45E21E769D470025E427 /* MainViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8CEC45E41E76B1150025E427 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Models/Card.swift; sourceTree = "<group>"; };
+		8CEC45E71E76B58A0025E427 /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardCollectionViewCell.swift; path = Views/CardCollectionViewCell.swift; sourceTree = "<group>"; };
+		8CEC45E81E76B58A0025E427 /* CardCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CardCollectionViewCell.xib; path = Views/CardCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				8CEC45E11E7686B50025E427 /* Util */,
+				8CEC45EB1E76B58D0025E427 /* Views */,
 				8CEC45E61E76B11A0025E427 /* Models */,
 				8CEC45CD1E767E700025E427 /* AppDelegate.swift */,
 				8CEC45CF1E767E700025E427 /* MainViewController.swift */,
@@ -87,6 +92,15 @@
 				8CEC45E41E76B1150025E427 /* Card.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		8CEC45EB1E76B58D0025E427 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8CEC45E71E76B58A0025E427 /* CardCollectionViewCell.swift */,
+				8CEC45E81E76B58A0025E427 /* CardCollectionViewCell.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +163,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CEC45EA1E76B58A0025E427 /* CardCollectionViewCell.xib in Resources */,
 				8CEC45D81E767E700025E427 /* LaunchScreen.storyboard in Resources */,
 				8CEC45D51E767E700025E427 /* Assets.xcassets in Resources */,
 				8CEC45D31E767E700025E427 /* Main.storyboard in Resources */,
@@ -166,6 +181,7 @@
 				8CEC45CE1E767E700025E427 /* AppDelegate.swift in Sources */,
 				8CEC45E51E76B1150025E427 /* Card.swift in Sources */,
 				8CEC45E01E7686AB0025E427 /* APIController.swift in Sources */,
+				8CEC45E91E76B58A0025E427 /* CardCollectionViewCell.swift in Sources */,
 				8CEC45E31E769D470025E427 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

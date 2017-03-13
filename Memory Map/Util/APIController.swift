@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 public struct APIError {
     
@@ -49,7 +50,11 @@ extension APIController {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "GET"
         
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         let task = URLSession.shared.dataTask(with: urlRequest, completionHandler: { (data, response, error) in
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             
             if let _ = error {
                 failure(APIError(errorType: .errorResponse))

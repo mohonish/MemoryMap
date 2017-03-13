@@ -21,7 +21,7 @@ public class MainViewModel {
     var state: GameState
     var cards = [Card]()
     
-    let cardCount = 9
+    public let cardCount = 9
     
     weak var delegate: MainViewModelProtocol?
     

@@ -18,6 +18,8 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var baseDashboard: UIView!
     
+    @IBOutlet weak var cardCollectionView: UICollectionView!
+    
     // MARK: - Class Members
     
     fileprivate var viewModel = MainViewModel()
@@ -26,6 +28,10 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.viewModel.delegate = self
+        
+        self.cardCollectionView.dataSource = self
         
         setupUI()
         setupGestures()
@@ -40,12 +46,17 @@ class MainViewController: UIViewController {
     
     func setupUI() {
         setupBaseDashboard()
+        setupCardCollectionView()
     }
 
     func setupBaseDashboard() {
         baseDashboard.layer.shadowColor = UIColor.black.cgColor
         baseDashboard.layer.shadowOpacity = 0.2
         baseDashboard.layer.shadowRadius = 4.0
+    }
+    
+    func setupCardCollectionView() {
+        self.cardCollectionView.register(UINib(nibName: "CardCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CardCollectionViewCell")
     }
     
     // MARK: - Gestures/Actions Setup
@@ -63,13 +74,34 @@ class MainViewController: UIViewController {
     // MARK: - Loading View
     
     func showLoadingView() {
-        self.loadingView.isHidden = false
+        DispatchQueue.main.async(execute: { [weak self] in
+            self?.loadingView.isHidden = false
+        })
     }
     
     func hideLoadingView() {
-        self.loadingView.isHidden = true
+        DispatchQueue.main.async(execute: { [weak self] in
+            self?.loadingView.isHidden = true
+        })
     }
 
+}
+
+extension MainViewController: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.viewModel.cardCount
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as! CardCollectionViewCell
+        return cell
+    }
+    
 }
 
 extension MainViewController: MainViewModelProtocol {
