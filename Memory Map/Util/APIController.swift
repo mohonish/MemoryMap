@@ -29,7 +29,7 @@ public enum APIErrorType {
 
 public class APIController {
     
-    fileprivate static let fetchImageEndpoint = "https://api.flickr.com/services/feeds/photos_public.gne?format=json"
+    fileprivate static let fetchImageEndpoint = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1"
     
     public static func fetchImages(success: @escaping (_ response: [String: Any]) -> Void, failure: @escaping (_ error: APIError) -> Void) {
         GET(url: fetchImageEndpoint, success: success, failure: failure)

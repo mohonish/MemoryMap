@@ -12,6 +12,10 @@ class MainViewController: UIViewController {
 
     // MARK: - IBOutlets
     
+    @IBOutlet weak var introductionView: UIView!
+    
+    @IBOutlet weak var loadingView: UIView!
+    
     @IBOutlet weak var baseDashboard: UIView!
     
     // MARK: - Class Members
@@ -24,6 +28,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         
         setupUI()
+        setupGestures()
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,5 +47,35 @@ class MainViewController: UIViewController {
         baseDashboard.layer.shadowOpacity = 0.2
         baseDashboard.layer.shadowRadius = 4.0
     }
+    
+    // MARK: - Gestures/Actions Setup
+    
+    func setupGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MainViewController.didTapBegin))
+        self.introductionView.addGestureRecognizer(tapGesture)
+    }
+    
+    func didTapBegin() {
+        self.introductionView.isHidden = true
+        self.viewModel.startGame()
+    }
+    
+    // MARK: - Loading View
+    
+    func showLoadingView() {
+        self.loadingView.isHidden = false
+    }
+    
+    func hideLoadingView() {
+        self.loadingView.isHidden = true
+    }
 
+}
+
+extension MainViewController: MainViewModelProtocol {
+    
+    func toggleLoadingView(show: Bool) {
+        show ? showLoadingView() : hideLoadingView()
+    }
+    
 }
