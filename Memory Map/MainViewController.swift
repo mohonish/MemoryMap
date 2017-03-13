@@ -32,6 +32,7 @@ class MainViewController: UIViewController {
         self.viewModel.delegate = self
         
         self.cardCollectionView.dataSource = self
+        self.cardCollectionView.delegate = self
         
         setupUI()
         setupGestures()
@@ -100,6 +101,20 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as! CardCollectionViewCell
         return cell
+    }
+    
+}
+
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //TODO: implement.
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.bounds.width / 3) - 10
+        let height = (collectionView.bounds.height / 3) - 10
+        return CGSize(width: width, height: height)
     }
     
 }
