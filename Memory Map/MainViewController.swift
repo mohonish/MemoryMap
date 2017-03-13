@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MainViewController.swift
 //  Memory Map
 //
 //  Created by Mohonish Chakraborty on 13/03/17.
@@ -8,11 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     // MARK: - IBOutlets
     
     @IBOutlet weak var baseDashboard: UIView!
+    
+    // MARK: - Class Members
+    
+    fileprivate var viewModel = MainViewModel()
     
     // MARK: - View Lifecycle
     
