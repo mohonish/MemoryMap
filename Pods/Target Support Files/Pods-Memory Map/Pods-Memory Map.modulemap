@@ -1,0 +1,6 @@
+framework module Pods_Memory_Map {
+  umbrella header "Pods-Memory Map-umbrella.h"
+
+  export *
+  module * { export * }
+}

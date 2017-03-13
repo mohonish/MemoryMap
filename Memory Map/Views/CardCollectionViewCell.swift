@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CardCollectionViewCell: UICollectionViewCell {
 
@@ -20,9 +21,14 @@ class CardCollectionViewCell: UICollectionViewCell {
     }
     
     func setupCard(_ card: Card) {
+        print("setupCard: \(card.id)")
         self.card = card
-        if let img = card.image {
-            self.cardImageView.image = img
+        if let url = URL(string: card.imagePath) {
+            print("setupCard Image: \(card.imagePath)")
+            self.cardImageView.kf.setImage(with: url, placeholder: Image(named: "defaultCard"), completionHandler: { (_, _, _, _) in
+                print("downloadCompletionHandler")
+                NotificationCenter.default.post(Notification(name: NSNotification.Name(rawValue: "DidFinishImageDownload")))
+            })
         }
     }
 

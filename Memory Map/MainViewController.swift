@@ -100,6 +100,12 @@ extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as! CardCollectionViewCell
+        if self.viewModel.state == .loading {
+            if self.viewModel.cards.count > 0 {
+                let thisCard = self.viewModel.cards[indexPath.item]
+                cell.setupCard(thisCard)
+            }
+        }
         return cell
     }
     
@@ -121,8 +127,31 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
 
 extension MainViewController: MainViewModelProtocol {
     
-    func toggleLoadingView(show: Bool) {
-        show ? showLoadingView() : hideLoadingView()
+    func reloadGameState() {
+        switch self.viewModel.state {
+            
+        case .start:
+            break
+            
+        case .loading:
+            showLoadingView()
+            DispatchQueue.main.async(execute: { [weak self] in
+                self?.cardCollectionView.reloadData()
+            })
+            break
+            
+        case .review:
+            hideLoadingView()
+            //TODO: start timer.
+            break
+            
+        case .recollect:
+            break
+            
+        case .end:
+            break
+            
+        }
     }
     
 }

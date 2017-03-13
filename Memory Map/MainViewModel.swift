@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol MainViewModelProtocol: class {
-    func toggleLoadingView(show: Bool)
+    func reloadGameState()
 }
 
 public enum GameState {
@@ -22,16 +22,22 @@ public class MainViewModel {
     var cards = [Card]()
     
     public let cardCount = 9
+    public var loadedImages = 0
     
     weak var delegate: MainViewModelProtocol?
     
     public init() {
         self.state = .start
+        NotificationCenter.default.addObserver(self, selector: #selector(MainViewModel.didFinishImageDownload), name: NSNotification.Name(rawValue: "DidFinishImageDownload"), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     public func startGame() {
         self.state = .loading
-        self.delegate?.toggleLoadingView(show: true)
+        self.delegate?.reloadGameState()
         self.fetchImages()
     }
     
@@ -69,7 +75,17 @@ extension MainViewModel {
             }
         }
         
-        self.delegate?.toggleLoadingView(show: false)
+        //Trigger reload to download and show images.
+        self.delegate?.reloadGameState()
+    }
+    
+    @objc fileprivate func didFinishImageDownload() {
+        print("didFinishImageDownload: \(loadedImages)")
+        self.loadedImages += 1
+        if loadedImages >= cardCount {
+            self.state = .review
+            self.delegate?.reloadGameState()
+        }
     }
     
 }

@@ -12,7 +12,6 @@ public struct Card {
     
     let id: Int!
     let imagePath: String!
-    var image: UIImage?
     
     var revealed = false
     
