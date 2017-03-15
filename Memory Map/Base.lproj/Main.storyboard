@@ -166,7 +166,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="LgM-TE-qfd"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                 <color key="textColor" white="0.0" alpha="0.6009521484375" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -175,7 +175,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="1ef-2b-mnL"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="13"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                 <color key="textColor" white="0.0" alpha="0.6009521484375" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>

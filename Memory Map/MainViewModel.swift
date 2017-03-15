@@ -23,14 +23,14 @@ public class MainViewModel {
     var currentCard: Card?
     var reviewTimer: Timer?
     
-    public var reviewTime = 5
     public let cardCount = 9
-    public var loadedImages = 0
-    public var revealCount = 0
-    private var guessCount = 0
+    public fileprivate(set) var reviewTime = 15
+    fileprivate var loadedImages = 0
+    fileprivate var revealCount = 0
+    fileprivate var guessCount = 0
     
-    var recollectStartTime = Date()
-    var recollectEndTime = Date()
+    public fileprivate(set) var recollectStartTime = Date()
+    public fileprivate(set) var recollectEndTime = Date()
     
     weak var delegate: MainViewModelProtocol?
     

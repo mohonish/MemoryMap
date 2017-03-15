@@ -85,7 +85,9 @@ class MainViewController: UIViewController {
     }
     
     func didTapRestart() {
-        //TODO: implement restart
+        self.viewModel = MainViewModel()
+        self.viewModel.delegate = self
+        self.reloadGameState()
     }
     
     // MARK: - Loading View
@@ -165,6 +167,11 @@ extension MainViewController: MainViewModelProtocol {
         switch self.viewModel.state {
             
         case .start:
+            DispatchQueue.main.async(execute: { [weak self] in
+                self?.scoreView.isHidden = true
+                self?.introductionView.isHidden = false
+                self?.currentCardImageView.image = UIImage(named: "defaultCard")
+            })
             break
             
         case .loading:
