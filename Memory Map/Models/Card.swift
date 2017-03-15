@@ -13,11 +13,15 @@ public struct Card {
     let id: Int!
     let imagePath: String!
     
-    var revealed = false
+    private(set) var isRevealed = true
     
     public init(id: Int, path: String) {
         self.id = id
         self.imagePath = path
+    }
+    
+    public mutating func setRevealed(_ revealed: Bool = true) {
+        self.isRevealed = revealed
     }
     
 }

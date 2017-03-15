@@ -104,11 +104,9 @@ extension MainViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as! CardCollectionViewCell
-        if self.viewModel.state == .loading {
-            if self.viewModel.cards.count > 0 {
-                let thisCard = self.viewModel.cards[indexPath.item]
-                cell.setupCard(thisCard)
-            }
+        if self.viewModel.cards.count > 0 {
+            let thisCard = self.viewModel.cards[indexPath.item]
+            cell.setupCard(thisCard)
         }
         return cell
     }
@@ -152,6 +150,10 @@ extension MainViewController: MainViewModelProtocol {
             break
             
         case .recollect:
+            DispatchQueue.main.async(execute: { [weak self] in
+                self?.actionLabel.text = "Guess the image position"
+                self?.cardCollectionView.reloadData()
+            })
             break
             
         case .end:

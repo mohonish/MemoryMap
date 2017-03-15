@@ -86,6 +86,7 @@ extension MainViewModel {
         print("didFinishImageDownload: \(loadedImages)")
         self.loadedImages += 1
         if loadedImages >= cardCount {
+            NotificationCenter.default.removeObserver(self)
             self.state = .review
             self.delegate?.reloadGameState()
             self.startTimer()
@@ -102,11 +103,21 @@ extension MainViewModel {
             this.reviewTime -= 1
             if this.reviewTime <= 0 {
                 timer.invalidate()
+                this.hideAllImages()
+                this.state = .recollect
             }
             this.delegate?.reloadGameState()
+            
         })
     }
     
-    
+    fileprivate func hideAllImages() {
+        var hiddenCards = [Card]()
+        for var thisCard in self.cards {
+            thisCard.setRevealed(false)
+            hiddenCards.append(thisCard)
+        }
+        self.cards = hiddenCards
+    }
     
 }
