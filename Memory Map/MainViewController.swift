@@ -16,6 +16,12 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var loadingView: UIView!
     
+    @IBOutlet weak var scoreView: UIView!
+    
+    @IBOutlet weak var scoreTimeLabel: UILabel!
+    
+    @IBOutlet weak var scoreAccuracyLabel: UILabel!
+    
     @IBOutlet weak var baseDashboard: UIView!
     
     @IBOutlet weak var currentCardImageView: UIImageView!
@@ -67,13 +73,19 @@ class MainViewController: UIViewController {
     // MARK: - Gestures/Actions Setup
     
     func setupGestures() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(MainViewController.didTapBegin))
-        self.introductionView.addGestureRecognizer(tapGesture)
+        let beginTapGesture = UITapGestureRecognizer(target: self, action: #selector(MainViewController.didTapBegin))
+        self.introductionView.addGestureRecognizer(beginTapGesture)
+        let restartTapGesture = UITapGestureRecognizer(target: self, action: #selector(MainViewController.didTapRestart))
+        self.scoreView.addGestureRecognizer(restartTapGesture)
     }
     
     func didTapBegin() {
         self.introductionView.isHidden = true
         self.viewModel.startGame()
+    }
+    
+    func didTapRestart() {
+        //TODO: implement restart
     }
     
     // MARK: - Loading View
@@ -88,6 +100,14 @@ class MainViewController: UIViewController {
         DispatchQueue.main.async(execute: { [weak self] in
             self?.loadingView.isHidden = true
         })
+    }
+    
+    // MARK: - Score View
+    
+    func showScores() {
+        self.scoreTimeLabel.text = "Elapsed Time: " + String(self.viewModel.getElapsedTimeInSeconds()) + "s"
+        self.scoreAccuracyLabel.text = "Guess Accuracy: " + String(format: "%.2f", self.viewModel.getGuessAccuracy())
+        self.scoreView.isHidden = false
     }
 
 }
@@ -126,6 +146,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
             selectedCard.id == self.viewModel.currentCard?.id {
             self.viewModel.cards[indexPath.item]?.setRevealed(true)
             self.viewModel.correctGuess()
+        } else {
+            self.viewModel.incorrectGuess()
         }
     }
     
@@ -172,6 +194,10 @@ extension MainViewController: MainViewModelProtocol {
             break
             
         case .end:
+            DispatchQueue.main.async(execute: { [weak self] in
+                self?.cardCollectionView.reloadData()
+                self?.showScores()
+            })
             break
             
         }

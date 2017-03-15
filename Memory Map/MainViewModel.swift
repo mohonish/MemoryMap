@@ -27,6 +27,10 @@ public class MainViewModel {
     public let cardCount = 9
     public var loadedImages = 0
     public var revealCount = 0
+    private var guessCount = 0
+    
+    var recollectStartTime = Date()
+    var recollectEndTime = Date()
     
     weak var delegate: MainViewModelProtocol?
     
@@ -47,7 +51,23 @@ public class MainViewModel {
     }
     
     public func correctGuess() {
+        self.guessCount += 1
         self.nextRecollectTurn()
+    }
+    
+    public func incorrectGuess() {
+        self.guessCount += 1
+    }
+    
+    //Return elapsed time in seconds (0 <= Int value)
+    public func getElapsedTimeInSeconds() -> Int {
+        return Int(recollectEndTime.timeIntervalSince(recollectStartTime))
+    }
+    
+    //Return guess accuracy in percentage (0 <= Int value <= 100)
+    public func getGuessAccuracy() -> Int {
+        let accuracy = (Float(cardCount) / Float(guessCount)) * 100
+        return Int(ceilf(accuracy))
     }
     
 }
@@ -111,6 +131,7 @@ extension MainViewModel {
                 timer.invalidate()
                 this.hideAllImages()
                 this.nextRecollectTurn()
+                this.recollectStartTime = Date()
                 this.state = .recollect
             }
             this.delegate?.reloadGameState()
@@ -132,8 +153,8 @@ extension MainViewModel {
             self.currentCard = nextCard
             self.delegate?.reloadGameState()
         } else {
-            //Move to end stage.
-            //TODO:
+            self.recollectEndTime = Date()
+            self.state = .end
             self.delegate?.reloadGameState()
         }
     }
