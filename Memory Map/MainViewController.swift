@@ -18,6 +18,10 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var baseDashboard: UIView!
     
+    @IBOutlet weak var currentCardImageView: UIImageView!
+    
+    @IBOutlet weak var actionLabel: UILabel!
+    
     @IBOutlet weak var cardCollectionView: UICollectionView!
     
     // MARK: - Class Members
@@ -141,8 +145,10 @@ extension MainViewController: MainViewModelProtocol {
             break
             
         case .review:
-            hideLoadingView()
-            //TODO: start timer.
+            if !self.loadingView.isHidden {
+                hideLoadingView()
+            }
+            actionLabel.text = "Time Remaining: " + String(self.viewModel.reviewTime) + "s"
             break
             
         case .recollect:

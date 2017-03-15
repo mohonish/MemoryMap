@@ -20,7 +20,9 @@ public class MainViewModel {
     
     var state: GameState
     var cards = [Card]()
+    var reviewTimer: Timer?
     
+    public var reviewTime = 15
     public let cardCount = 9
     public var loadedImages = 0
     
@@ -33,6 +35,7 @@ public class MainViewModel {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        reviewTimer?.invalidate()
     }
     
     public func startGame() {
@@ -85,7 +88,25 @@ extension MainViewModel {
         if loadedImages >= cardCount {
             self.state = .review
             self.delegate?.reloadGameState()
+            self.startTimer()
         }
     }
+    
+    fileprivate func startTimer() {
+        self.reviewTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (timer) in
+            
+            guard let this = self else {
+                return
+            }
+            
+            this.reviewTime -= 1
+            if this.reviewTime <= 0 {
+                timer.invalidate()
+            }
+            this.delegate?.reloadGameState()
+        })
+    }
+    
+    
     
 }

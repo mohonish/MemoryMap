@@ -23,12 +23,49 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3rN-Er-JKZ" userLabel="Base Dashboard">
                                 <rect key="frame" x="0.0" y="517" width="375" height="150"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultCard" translatesAutoresizingMaskIntoConstraints="NO" id="N83-qE-Nvy">
+                                        <rect key="frame" x="30" y="25" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="8XU-rL-gOx"/>
+                                            <constraint firstAttribute="height" constant="100" id="q4V-dP-axj"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gUc-YT-bLd">
+                                        <rect key="frame" x="160" y="76" width="185" height="0.0"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.60009765625" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="gUc-YT-bLd" secondAttribute="trailing" constant="30" id="4z8-Ar-4cW"/>
+                                    <constraint firstItem="gUc-YT-bLd" firstAttribute="centerY" secondItem="3rN-Er-JKZ" secondAttribute="centerY" id="LS7-aV-SWa"/>
+                                    <constraint firstItem="N83-qE-Nvy" firstAttribute="leading" secondItem="3rN-Er-JKZ" secondAttribute="leading" constant="30" id="Nbp-gm-aqt"/>
+                                    <constraint firstItem="N83-qE-Nvy" firstAttribute="centerY" secondItem="3rN-Er-JKZ" secondAttribute="centerY" id="S5R-S2-lys"/>
                                     <constraint firstAttribute="height" constant="150" id="b4K-Q0-16A"/>
+                                    <constraint firstItem="gUc-YT-bLd" firstAttribute="leading" secondItem="N83-qE-Nvy" secondAttribute="trailing" constant="30" id="vnq-0N-dxD"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3j9-Xc-GTa">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pdg-Eb-Jbc" userLabel="Top Dashboard">
+                                <rect key="frame" x="15" y="30" width="345" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memory Map" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOI-6Z-lr7">
+                                        <rect key="frame" x="120.5" y="18" width="104" height="23.5"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.8001360212053571" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Ec0-OC-vaQ"/>
+                                    <constraint firstItem="yOI-6Z-lr7" firstAttribute="centerX" secondItem="Pdg-Eb-Jbc" secondAttribute="centerX" id="kex-dT-fjv"/>
+                                    <constraint firstItem="yOI-6Z-lr7" firstAttribute="centerY" secondItem="Pdg-Eb-Jbc" secondAttribute="centerY" id="p6b-wC-zY6"/>
+                                </constraints>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3j9-Xc-GTa">
                                 <rect key="frame" x="30" y="120" width="315" height="347"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="RaY-GA-MoG">
@@ -112,26 +149,31 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Pdg-Eb-Jbc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="4wx-i8-Jnf"/>
                             <constraint firstAttribute="trailing" secondItem="3rN-Er-JKZ" secondAttribute="trailing" id="6SF-3l-OB6"/>
                             <constraint firstItem="3vy-LL-cfA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6aT-W5-7EC"/>
                             <constraint firstItem="3rN-Er-JKZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="78Y-vx-r02"/>
                             <constraint firstItem="3vy-LL-cfA" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="8DH-rN-GbW"/>
                             <constraint firstItem="eFp-e1-3bC" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="HuV-gk-S7y"/>
+                            <constraint firstItem="3j9-Xc-GTa" firstAttribute="top" secondItem="Pdg-Eb-Jbc" secondAttribute="bottom" constant="10" id="M5h-ns-der"/>
                             <constraint firstItem="eFp-e1-3bC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="U3p-oc-s37"/>
                             <constraint firstItem="3rN-Er-JKZ" firstAttribute="top" secondItem="3j9-Xc-GTa" secondAttribute="bottom" constant="50" id="Vmv-wP-DWz"/>
                             <constraint firstItem="3j9-Xc-GTa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="Z48-ef-jek"/>
-                            <constraint firstItem="3j9-Xc-GTa" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="100" id="c9b-K0-Mce"/>
+                            <constraint firstAttribute="trailing" secondItem="Pdg-Eb-Jbc" secondAttribute="trailing" constant="15" id="bKR-3o-uEi"/>
                             <constraint firstAttribute="trailing" secondItem="3j9-Xc-GTa" secondAttribute="trailing" constant="30" id="g7S-Fa-kme"/>
                             <constraint firstAttribute="trailing" secondItem="3vy-LL-cfA" secondAttribute="trailing" id="iB0-aA-03C"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3rN-Er-JKZ" secondAttribute="bottom" id="lN3-C3-4fE"/>
+                            <constraint firstItem="Pdg-Eb-Jbc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="oNK-QL-DBR"/>
                             <constraint firstAttribute="trailing" secondItem="eFp-e1-3bC" secondAttribute="trailing" id="piW-Xp-5AN"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="eFp-e1-3bC" secondAttribute="bottom" id="sRa-5y-8vq"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3vy-LL-cfA" secondAttribute="bottom" id="xaP-dE-zU6"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="actionLabel" destination="gUc-YT-bLd" id="LRd-4Z-bUg"/>
                         <outlet property="baseDashboard" destination="3rN-Er-JKZ" id="9Mf-aP-l6l"/>
                         <outlet property="cardCollectionView" destination="3j9-Xc-GTa" id="cAB-ca-3pg"/>
+                        <outlet property="currentCardImageView" destination="N83-qE-Nvy" id="XoV-QM-k6Y"/>
                         <outlet property="introductionView" destination="eFp-e1-3bC" id="Tdg-6Z-Blu"/>
                         <outlet property="loadingView" destination="3vy-LL-cfA" id="RFq-AI-XC5"/>
                     </connections>
@@ -141,4 +183,7 @@
             <point key="canvasLocation" x="140" y="137.18140929535232"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="defaultCard" width="80" height="72"/>
+    </resources>
 </document>
