@@ -20,11 +20,13 @@ public class MainViewModel {
     
     var state: GameState
     var cards = Dictionary<Int, Card>() // [Card]()
+    var currentCard: Card?
     var reviewTimer: Timer?
     
     public var reviewTime = 5
     public let cardCount = 9
     public var loadedImages = 0
+    public var revealCount = 0
     
     weak var delegate: MainViewModelProtocol?
     
@@ -42,6 +44,10 @@ public class MainViewModel {
         self.state = .loading
         self.delegate?.reloadGameState()
         self.fetchImages()
+    }
+    
+    public func correctGuess() {
+        self.nextRecollectTurn()
     }
     
 }
@@ -104,6 +110,7 @@ extension MainViewModel {
             if this.reviewTime <= 0 {
                 timer.invalidate()
                 this.hideAllImages()
+                this.nextRecollectTurn()
                 this.state = .recollect
             }
             this.delegate?.reloadGameState()
@@ -118,6 +125,34 @@ extension MainViewModel {
             hiddenCards[thisCard.key]?.setRevealed(false)
         }
         self.cards = hiddenCards
+    }
+    
+    fileprivate func nextRecollectTurn() {
+        if let nextCard = getNextCardForDiscovery() {
+            self.currentCard = nextCard
+            self.delegate?.reloadGameState()
+        } else {
+            //Move to end stage.
+            //TODO:
+            self.delegate?.reloadGameState()
+        }
+    }
+    
+    fileprivate func getNextCardForDiscovery() -> Card? {
+        if revealCount < cardCount {
+            let randomImageIndex = getRandomNonRevealedImageIndex()
+            revealCount += 1
+            return cards[randomImageIndex]
+        }
+        return nil
+    }
+    
+    fileprivate func getRandomNonRevealedImageIndex() -> Int {
+        var imageIndex = 0
+        repeat {
+            imageIndex = Int(arc4random_uniform(9))
+        } while(cards[imageIndex]?.isRevealed == true)
+        return imageIndex
     }
     
 }

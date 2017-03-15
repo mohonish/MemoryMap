@@ -117,7 +117,16 @@ extension MainViewController: UICollectionViewDataSource {
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //TODO: implement.
+        
+        guard let selectedCard = self.viewModel.cards[indexPath.item] else {
+            return
+        }
+        
+        if selectedCard.isRevealed != true,
+            selectedCard.id == self.viewModel.currentCard?.id {
+            self.viewModel.cards[indexPath.item]?.setRevealed(true)
+            self.viewModel.correctGuess()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -154,6 +163,11 @@ extension MainViewController: MainViewModelProtocol {
             DispatchQueue.main.async(execute: { [weak self] in
                 self?.actionLabel.text = "Guess the image position"
                 self?.cardCollectionView.reloadData()
+                if let currentCard = self?.viewModel.currentCard {
+                    if let cardImageURL = URL(string: currentCard.imagePath) {
+                        self?.currentCardImageView.kf.setImage(with: cardImageURL)
+                    }
+                }
             })
             break
             
