@@ -106,7 +106,7 @@ class MainViewController: UIViewController {
     
     func showScores() {
         self.scoreTimeLabel.text = "Elapsed Time: " + String(self.viewModel.getElapsedTimeInSeconds()) + "s"
-        self.scoreAccuracyLabel.text = "Guess Accuracy: " + String(format: "%.2f", self.viewModel.getGuessAccuracy())
+        self.scoreAccuracyLabel.text = "Guess Accuracy: " + String(self.viewModel.getGuessAccuracy()) + "%"
         self.scoreView.isHidden = false
     }
 
