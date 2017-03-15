@@ -19,10 +19,10 @@ public enum GameState {
 public class MainViewModel {
     
     var state: GameState
-    var cards = [Card]()
+    var cards = Dictionary<Int, Card>() // [Card]()
     var reviewTimer: Timer?
     
-    public var reviewTime = 15
+    public var reviewTime = 5
     public let cardCount = 9
     public var loadedImages = 0
     
@@ -63,13 +63,13 @@ extension MainViewModel {
         }
         
         var imageID = 0
-        self.cards = [Card]()
+        self.cards = Dictionary<Int, Card>()
         
         for item in items {
             if let media = item["media"] as? Dictionary<String, Any> {
                 if let imageURL = media["m"] as? String {
                     let thisCard = Card(id: imageID, path: imageURL)
-                    self.cards.append(thisCard)
+                    self.cards[imageID] = thisCard
                     imageID += 1
                 }
             }
@@ -112,10 +112,10 @@ extension MainViewModel {
     }
     
     fileprivate func hideAllImages() {
-        var hiddenCards = [Card]()
-        for var thisCard in self.cards {
-            thisCard.setRevealed(false)
-            hiddenCards.append(thisCard)
+        var hiddenCards = Dictionary<Int, Card>()
+        for thisCard in self.cards {
+            hiddenCards[thisCard.key] = thisCard.value
+            hiddenCards[thisCard.key]?.setRevealed(false)
         }
         self.cards = hiddenCards
     }

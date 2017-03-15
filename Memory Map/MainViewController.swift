@@ -105,8 +105,9 @@ extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CardCollectionViewCell", for: indexPath) as! CardCollectionViewCell
         if self.viewModel.cards.count > 0 {
-            let thisCard = self.viewModel.cards[indexPath.item]
-            cell.setupCard(thisCard)
+            if let thisCard = self.viewModel.cards[indexPath.item] {
+                cell.setupCard(thisCard)
+            }
         }
         return cell
     }
