@@ -23,11 +23,11 @@ public class MainViewModel {
     var currentCard: Card?
     var reviewTimer: Timer?
     
-    public let cardCount = 9
-    public fileprivate(set) var reviewTime = 15
-    fileprivate var loadedImages = 0
-    fileprivate var revealCount = 0
-    fileprivate var guessCount = 0
+    public let cardCount = 9 //count for number of cards
+    public fileprivate(set) var reviewTime = 15 //time in seconds for review stage
+    fileprivate var loadedImages = 0 //count of total number of images that have been downloaded
+    fileprivate var revealCount = 0 //count of number of cards revealed
+    fileprivate var guessCount = 0 //count for number of guesses
     
     public fileprivate(set) var recollectStartTime = Date()
     public fileprivate(set) var recollectEndTime = Date()
