@@ -20,14 +20,12 @@ class CardCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
+    //Set data for card.
     func setupCard(_ card: Card) {
-        print("setupCard: \(card.id) revealed: \(card.isRevealed)")
         self.card = card
         if card.isRevealed {
             if let url = URL(string: card.imagePath) {
-                print("setupCard Image: \(card.imagePath)")
                 self.cardImageView.kf.setImage(with: url, placeholder: Image(named: "defaultCard"), completionHandler: { (_, _, _, _) in
-                    print("downloadCompletionHandler")
                     NotificationCenter.default.post(Notification(name: NSNotification.Name(rawValue: "DidFinishImageDownload")))
                 })
             }

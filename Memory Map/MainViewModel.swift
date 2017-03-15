@@ -19,7 +19,7 @@ public enum GameState {
 public class MainViewModel {
     
     var state: GameState
-    var cards = Dictionary<Int, Card>() // [Card]()
+    var cards = Dictionary<Int, Card>() //Dictionary of image cards.
     var currentCard: Card?
     var reviewTimer: Timer?
     
@@ -35,7 +35,8 @@ public class MainViewModel {
     weak var delegate: MainViewModelProtocol?
     
     public init() {
-        self.state = .start
+        self.state = .start //Initial State.
+        //Set observer for notification, triggered when an image finishes downloading.
         NotificationCenter.default.addObserver(self, selector: #selector(MainViewModel.didFinishImageDownload), name: NSNotification.Name(rawValue: "DidFinishImageDownload"), object: nil)
     }
     
@@ -43,6 +44,8 @@ public class MainViewModel {
         NotificationCenter.default.removeObserver(self)
         reviewTimer?.invalidate()
     }
+    
+    // MARK: - Public methods
     
     public func startGame() {
         self.state = .loading
@@ -84,7 +87,7 @@ extension MainViewModel {
     
     fileprivate func parseImageResponse(_ response: [String: Any]) {
         guard let items = response["items"] as? [Dictionary<String, Any>] else {
-            //TODO: handle error
+            //TODO: handle parsing error
             return
         }
         
@@ -109,9 +112,8 @@ extension MainViewModel {
     }
     
     @objc fileprivate func didFinishImageDownload() {
-        print("didFinishImageDownload: \(loadedImages)")
         self.loadedImages += 1
-        if loadedImages >= cardCount {
+        if loadedImages >= cardCount { //All images loaded, move to review state.
             NotificationCenter.default.removeObserver(self)
             self.state = .review
             self.delegate?.reloadGameState()
@@ -119,6 +121,7 @@ extension MainViewModel {
         }
     }
     
+    //Start timer for review stage
     fileprivate func startTimer() {
         self.reviewTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (timer) in
             
@@ -127,7 +130,7 @@ extension MainViewModel {
             }
             
             this.reviewTime -= 1
-            if this.reviewTime <= 0 {
+            if this.reviewTime <= 0 { //End of review time.
                 timer.invalidate()
                 this.hideAllImages()
                 this.nextRecollectTurn()
@@ -139,6 +142,7 @@ extension MainViewModel {
         })
     }
     
+    //Set all card images to not revealed.
     fileprivate func hideAllImages() {
         var hiddenCards = Dictionary<Int, Card>()
         for thisCard in self.cards {
@@ -148,30 +152,35 @@ extension MainViewModel {
         self.cards = hiddenCards
     }
     
+    //Move to next turn/card for recollect stage.
     fileprivate func nextRecollectTurn() {
-        if let nextCard = getNextCardForDiscovery() {
-            self.currentCard = nextCard
-            self.delegate?.reloadGameState()
-        } else {
-            self.recollectEndTime = Date()
-            self.state = .end
-            self.delegate?.reloadGameState()
+        if let nextCard = getNextCardForDiscovery() { //Get next card for recollect stage
+            self.currentCard = nextCard //Set next card for recollect stage
+            self.delegate?.reloadGameState() //Trigger reload
+        } else { //If all cards finished for recollect stage
+            self.recollectEndTime = Date() //Capture recollect end time.
+            self.state = .end //Move to end stage.
+            self.delegate?.reloadGameState() //Trigger reload.
         }
     }
     
+    //Returns next random card for recollect stage.
     fileprivate func getNextCardForDiscovery() -> Card? {
         if revealCount < cardCount {
-            let randomImageIndex = getRandomNonRevealedImageIndex()
+            let randomImageIndex = getRandomNonRevealedImageIndex() //Get random index of non revealed image.
             revealCount += 1
-            return cards[randomImageIndex]
+            return cards[randomImageIndex] //return card at index
         }
         return nil
     }
     
+    //Return random index of non-revealed image card.
+    //Note: should not be called after all cards are revealed, will inevitably lead to an infinite loop.
+    //TODO: better implementation.
     fileprivate func getRandomNonRevealedImageIndex() -> Int {
         var imageIndex = 0
         repeat {
-            imageIndex = Int(arc4random_uniform(9))
+            imageIndex = Int(arc4random_uniform(9)) //Get random number between 0 - 9
         } while(cards[imageIndex]?.isRevealed == true)
         return imageIndex
     }

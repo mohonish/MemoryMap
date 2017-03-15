@@ -39,8 +39,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Set delegates
         self.viewModel.delegate = self
-        
         self.cardCollectionView.dataSource = self
         self.cardCollectionView.delegate = self
         
@@ -70,7 +70,7 @@ class MainViewController: UIViewController {
         self.cardCollectionView.register(UINib(nibName: "CardCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CardCollectionViewCell")
     }
     
-    // MARK: - Gestures/Actions Setup
+    // MARK: - Gestures/Actions
     
     func setupGestures() {
         let beginTapGesture = UITapGestureRecognizer(target: self, action: #selector(MainViewController.didTapBegin))
@@ -114,6 +114,8 @@ class MainViewController: UIViewController {
 
 }
 
+// MARK: - UICollectionView DataSource
+
 extension MainViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -136,6 +138,8 @@ extension MainViewController: UICollectionViewDataSource {
     
 }
 
+// MARK: - UICollectionView Delegate
+
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -144,12 +148,13 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
             return
         }
         
-        if selectedCard.isRevealed != true,
-            selectedCard.id == self.viewModel.currentCard?.id {
-            self.viewModel.cards[indexPath.item]?.setRevealed(true)
-            self.viewModel.correctGuess()
-        } else {
-            self.viewModel.incorrectGuess()
+        if selectedCard.isRevealed != true {
+            if selectedCard.id == self.viewModel.currentCard?.id {
+                self.viewModel.cards[indexPath.item]?.setRevealed(true)
+                self.viewModel.correctGuess()
+            } else {
+                self.viewModel.incorrectGuess()
+            }
         }
     }
     
@@ -161,12 +166,16 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDelegate
     
 }
 
+// MARK: - MainViewModel Protocol Implementation
+
 extension MainViewController: MainViewModelProtocol {
     
+    //Method called whenever state changes or view needs to update.
     func reloadGameState() {
+        
         switch self.viewModel.state {
             
-        case .start:
+        case .start: //Initial stage, showing game instructions.
             DispatchQueue.main.async(execute: { [weak self] in
                 self?.scoreView.isHidden = true
                 self?.introductionView.isHidden = false
@@ -174,21 +183,21 @@ extension MainViewController: MainViewModelProtocol {
             })
             break
             
-        case .loading:
+        case .loading: //Loading stage, downloading/caching images from api.
             showLoadingView()
             DispatchQueue.main.async(execute: { [weak self] in
                 self?.cardCollectionView.reloadData()
             })
             break
             
-        case .review:
+        case .review: //Review stage, specific duration given to user to remember image locations.
             if !self.loadingView.isHidden {
                 hideLoadingView()
             }
             actionLabel.text = "Time Remaining: " + String(self.viewModel.reviewTime) + "s"
             break
             
-        case .recollect:
+        case .recollect: //Recollect stage, when user needs to tap on appropriate cell to identify current image position.
             DispatchQueue.main.async(execute: { [weak self] in
                 self?.actionLabel.text = "Guess the image position"
                 self?.cardCollectionView.reloadData()
@@ -200,7 +209,7 @@ extension MainViewController: MainViewModelProtocol {
             })
             break
             
-        case .end:
+        case .end: //End stage, scores are shown.
             DispatchQueue.main.async(execute: { [weak self] in
                 self?.cardCollectionView.reloadData()
                 self?.showScores()

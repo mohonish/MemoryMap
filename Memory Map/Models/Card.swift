@@ -10,10 +10,10 @@ import UIKit
 
 public struct Card {
     
-    let id: Int!
-    let imagePath: String!
+    let id: Int! //Used to uniquely identify card.
+    let imagePath: String! //Path to image received from api.
     
-    private(set) var isRevealed = true
+    private(set) var isRevealed = true //Whether image is currently shown to user or hidden.
     
     public init(id: Int, path: String) {
         self.id = id
